@@ -1,0 +1,19 @@
+name: Test
+
+on: push
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - id: telegram
+        uses: ./
+        with:
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          chatId: ${{ secrets.TELEGRAM_CHAT_ID }}
+          messageThreadId: 1199
+          text: "actions.telegram-notify 测试消息"
+      - run: |
+          [[ "${{ steps.telegram.outputs.success }}" == "true" ]] || exit 1
