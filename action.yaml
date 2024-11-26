@@ -1,0 +1,51 @@
+name: "Telegram Notify"
+description: "Telegram 通知"
+inputs:
+  token:
+    description: "Telegram Bot Token"
+    required: true
+  chatId:
+    description: "Telegram Chat Id"
+    required: true
+  messageThreadId:
+    description: "Telegram Topic Id"
+  parseMode:
+    description: "解析消息体的模式(https://core.telegram.org/bots/api#formatting-options) MarkdownV2/HTML"
+    required: false
+    default: MarkdownV2
+  text:
+    description: "消息体"
+    required: true
+
+  disableNotification:
+    description: "静默，用户将收到无声消息"
+    required: false
+    default: false
+  protectContent:
+    description: "保护消息不会被转发或者保存"
+    required: false
+    default: false
+
+outputs:
+  success:
+    description: "是否成功推送消息"
+    value: ${{ steps.telegram.outputs.success }}
+
+runs:
+  using: composite
+  steps:
+    - id: telegram
+      shell: bash
+      run: |
+        BODY=$(curl -X POST \
+          https://api.telegram.org/bot${{ inputs.token }}/sendMessage \
+          -d chat_id="${{ inputs.chatId }}" \
+          -d text="${{ inputs.text }}" \
+          -d parse_mode="${{ inputs.parseMode }}" \
+          -d message_thread_id="${{ inputs.messageThreadId }}" \
+          -d disable_notification=${{ inputs.disableNotification }} \
+          -d protect_content=${{ inputs.protectContent }})
+
+        SUCCESS=$(echo $BODY | jq -r '.ok')
+
+        export "success=$SUCCESS" >> $GITHUB_OUTPUT
