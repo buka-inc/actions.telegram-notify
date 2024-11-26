@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: telegram
-        uses: ./
+        uses: buka-inc/actions.telegram-notify@v1
         with:
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           chatId: ${{ secrets.TELEGRAM_CHAT_ID }}
