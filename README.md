@@ -4,15 +4,15 @@
 
 ## Inputs
 
-| **Arguments**       | **Required** | **Description**                                                                        |
-| :------------------ | :----------- | -------------------------------------------------------------------------------------- |
-| token               | true         | Telegram Token (`https://api.telegram.org/bot{{token}}/sendMessage`)                   |
-| chartId             | true         | Telegram Chat ID                                                                       |
-| messageThreadId     | true         | The Id Of Telegram Topic                                                               |
-| text                | true         | 消息体                                                                                 |
-| parseMode           | false        | `"MarkdownV2" \| "HTML"` [详见](https://core.telegram.org/bots/api#formatting-options) |
-| disableNotification | false        | 静默，用户将收到无声消息                                                               |
-| protectContent      | false        | 保护消息不会被转发或者保存                                                             |
+| **Arguments**       | **Required** | **Description**                                                                                      |
+| :------------------ | :----------- | ---------------------------------------------------------------------------------------------------- |
+| token               | true         | Telegram Token (`https://api.telegram.org/bot{{token}}/sendMessage`)                                 |
+| chartId             | true         | Telegram Chat ID                                                                                     |
+| messageThreadId     | true         | The Id Of Telegram Topic                                                                             |
+| text                | true         | 消息体                                                                                               |
+| parseMode           | false        | `"MarkdownV2" \| "HTML" \| "Markdown"` [详见](https://core.telegram.org/bots/api#formatting-options) |
+| disableNotification | false        | 静默，用户将收到无声消息                                                                             |
+| protectContent      | false        | 保护消息不会被转发或者保存                                                                           |
 
 ## Example
 

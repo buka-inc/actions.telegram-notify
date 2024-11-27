@@ -10,7 +10,7 @@ inputs:
   messageThreadId:
     description: "Telegram Topic Id"
   parseMode:
-    description: "解析消息体的模式(https://core.telegram.org/bots/api#formatting-options) MarkdownV2/HTML"
+    description: "解析消息体的模式(https://core.telegram.org/bots/api#formatting-options) MarkdownV2/HTML/Markdown"
     required: false
     default: MarkdownV2
   text:
