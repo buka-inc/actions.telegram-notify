@@ -14,12 +14,6 @@
 | disableNotification | false        | 静默，用户将收到无声消息                                                               |
 | protectContent      | false        | 保护消息不会被转发或者保存                                                             |
 
-## Outputs
-
-| **Property** | **Description**                      |
-| :----------- | :----------------------------------- |
-| success      | `"true" \| "false"` 是否成功推送消息 |
-
 ## Example
 
 ```yaml

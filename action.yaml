@@ -45,8 +45,12 @@ runs:
           -d disable_notification=${{ inputs.disableNotification }} \
           -d protect_content=${{ inputs.protectContent }})
 
-        echo $BODY
-
         SUCCESS=$(echo $BODY | jq -r '.ok')
 
-        export "success=$SUCCESS" >> $GITHUB_OUTPUT
+        [ "$SUCCESS" = "true" ] && exit 0
+
+        ERROR_CODE=$(echo $BODY | jq -r '.error_code')
+        DESCRIPTION=$(echo $BODY | jq -r '.description')
+
+        echo "Telegram Notify failed with error code: $ERROR_CODE, description: $DESCRIPTION"
+        exit 1
