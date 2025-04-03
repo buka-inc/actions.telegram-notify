@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/buka-inc/actions.telegram-notify/compare/v1.0.1...v1.0.2) (2025-04-03)
+
+
+### Performance Improvements
+
+* set default parse mode as markdown ([546e6a3](https://github.com/buka-inc/actions.telegram-notify/commit/546e6a3aa2bc476676ac37e39791eaad3344b753))
+
 ## [1.0.1](https://github.com/buka-inc/actions.telegram-notify/compare/v1.0.0...v1.0.1) (2024-11-27)
 
 
