@@ -12,7 +12,7 @@ inputs:
   parseMode:
     description: "解析消息体的模式(https://core.telegram.org/bots/api#formatting-options) MarkdownV2/HTML/Markdown"
     required: false
-    default: MarkdownV2
+    default: Markdown
   text:
     description: "消息体"
     required: true
@@ -20,11 +20,11 @@ inputs:
   disableNotification:
     description: "静默，用户将收到无声消息"
     required: false
-    default: false
+    default: 'false'
   protectContent:
     description: "保护消息不会被转发或者保存"
     required: false
-    default: false
+    default: 'false'
 
 outputs:
   success:
@@ -34,23 +34,23 @@ outputs:
 runs:
   using: composite
   steps:
-    - id: telegram
-      shell: bash
-      run: |
-        BODY=$(curl -X POST https://api.telegram.org/bot${{ inputs.token }}/sendMessage \
-          -d chat_id="${{ inputs.chatId }}" \
-          -d text="${{ inputs.text }}" \
-          -d parse_mode="${{ inputs.parseMode }}" \
-          -d message_thread_id="${{ inputs.messageThreadId }}" \
-          -d disable_notification=${{ inputs.disableNotification }} \
-          -d protect_content=${{ inputs.protectContent }})
+  - id: telegram
+    shell: bash
+    run: |
+      BODY=$(curl -X POST https://api.telegram.org/bot${{ inputs.token }}/sendMessage \
+        -d chat_id="${{ inputs.chatId }}" \
+        -d text="${{ inputs.text }}" \
+        -d parse_mode="${{ inputs.parseMode }}" \
+        -d message_thread_id="${{ inputs.messageThreadId }}" \
+        -d disable_notification=${{ inputs.disableNotification }} \
+        -d protect_content=${{ inputs.protectContent }})
 
-        SUCCESS=$(echo $BODY | jq -r '.ok')
+      SUCCESS=$(echo $BODY | jq -r '.ok')
 
-        [ "$SUCCESS" = "true" ] && exit 0
+      [ "$SUCCESS" = "true" ] && exit 0
 
-        ERROR_CODE=$(echo $BODY | jq -r '.error_code')
-        DESCRIPTION=$(echo $BODY | jq -r '.description')
+      ERROR_CODE=$(echo $BODY | jq -r '.error_code')
+      DESCRIPTION=$(echo $BODY | jq -r '.description')
 
-        echo "Telegram Notify failed with error code: $ERROR_CODE, description: $DESCRIPTION"
-        exit 1
+      echo "Telegram Notify failed with error code: $ERROR_CODE, description: $DESCRIPTION"
+      exit 1

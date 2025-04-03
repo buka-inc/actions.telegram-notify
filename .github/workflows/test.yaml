@@ -17,4 +17,4 @@ jobs:
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           chatId: ${{ secrets.TELEGRAM_CHAT_ID }}
           messageThreadId: 3227
-          text: "actions\\.telegram\\-notify 测试消息"
+          text: "actions.telegram-notify 测试消息"
